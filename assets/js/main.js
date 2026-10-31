@@ -62,7 +62,28 @@
   function setOpen(open) { nav.classList.toggle("open", open); btn.setAttribute("aria-expanded", open ? "true" : "false"); btn.setAttribute("aria-label", open ? "Затвори мени" : "Мени"); document.documentElement.classList.toggle("menu-open", open); }
   window.addEventListener("resize", function () { if (window.innerWidth > 860) setOpen(false); });
   btn.addEventListener("click", function () { setOpen(!nav.classList.contains("open")); });
-  nav.addEventListener("click", function (e) { if (e.target.closest("a")) setOpen(false); });
+  nav.addEventListener("click", function (e) {
+    var a = e.target.closest("a");
+    if (!a) return;
+    var h = a.getAttribute("href") || "";
+    var wasOpen = nav.classList.contains("open");
+    setOpen(false);
+    // on phones the page is locked while the menu is open; unlock first, then scroll ourselves on the next frame
+    if (wasOpen && h.charAt(0) === "#" && h.length > 1) {
+      var t = document.getElementById(h.slice(1));
+      if (!t) return;
+      e.preventDefault();
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          var head = document.querySelector("header");
+          var y = t.getBoundingClientRect().top + window.pageYOffset - (head ? head.offsetHeight : 0);
+          var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          window.scrollTo({ top: Math.max(0, y), behavior: reduce ? "auto" : "smooth" });
+          if (history.replaceState) history.replaceState(null, "", h);
+        });
+      });
+    }
+  });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") setOpen(false); });
 })();
 (function () {
