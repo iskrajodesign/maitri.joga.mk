@@ -21,7 +21,7 @@
   color-scheme: light;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 body {
   margin: 0;
   background: var(--paper);
@@ -438,4 +438,47 @@ html.sheet-open .cursor-dot, html.sheet-open .cursor-lotus { opacity: 0 !importa
 @media (prefers-reduced-motion: reduce) {
   .call-sheet[open] .call-inner { animation: none; }
   nav, nav ul li, .menu-btn span { transition: none !important; }
+}
+
+/* phones: one calm type scale so every phone shows the same proportions */
+@media (max-width: 560px) {
+  body { font-size: 16px; line-height: 1.55; }
+  .label { font-size: 0.7rem; letter-spacing: 0.14em; }
+  .sec { padding-block: 44px; }
+  .head { margin-bottom: 22px; gap: 6px; }
+  h2 { font-size: 2rem; line-height: 1.1; }
+  .about-statement h2 { font-size: 2.1rem; }
+  .about-words { font-size: 1.2rem; }
+  .hero .wrap { padding-block: 26px 12px; gap: 26px; }
+  .hero-text { gap: 16px; }
+  .hero h1 { font-size: 2.65rem; line-height: 1; }
+  .hero-lead { font-size: 1.02rem; }
+  .where strong { font-size: 1.3rem; }
+  .btn { padding: 12px 20px; font-size: 0.98rem; }
+  .today h2 { font-size: 1.5rem; }
+  .practices dt { font-size: 1.3rem; }
+  .practices dd, .extras dd, .founder figcaption span:last-child, .seal-row p { font-size: 0.93rem; }
+  .practices div { padding-block: 12px; }
+  .extras dt { font-size: 1.15rem; }
+  .stone .amount { font-size: 1.75rem; }
+  .stone .per { font-size: 0.9rem; }
+  .ytt-big { font-size: 1.3rem; }
+  .facts dd { font-size: 1.15rem; }
+  .event h3 { font-size: 1.6rem; }
+  .event-now strong { font-size: 1.25rem; }
+  .dates { font-size: 1.2rem; }
+  .contact .value { font-size: 1.3rem; }
+  .contact { gap: 16px; }
+  .call-sheet h2 { font-size: 1.65rem; }
+  .call-opt strong { font-size: 1.2rem; }
+}
+
+/* the menu always fits the visible screen, whatever the phone and browser bars */
+@media (max-width: 860px) {
+  nav, nav.open { padding-top: calc(env(safe-area-inset-top, 0px) + 72px); padding-bottom: max(16px, env(safe-area-inset-bottom, 0px)); }
+  nav ul a { font-size: clamp(1.3rem, 4.4dvh, 1.85rem); line-height: 1.15; padding-block: clamp(5px, 1.35dvh, 12px); }
+  .nav-call { margin-top: clamp(10px, 2.2dvh, 22px); padding: clamp(10px, 1.6dvh, 14px); font-size: 1rem; }
+  .nav-foot { padding-top: clamp(10px, 2dvh, 24px); font-size: 0.88rem; gap: 2px; }
+  .nav-foot a { font-size: 0.88rem; }
+  nav::after { width: clamp(90px, 18dvh, 150px); }
 }
