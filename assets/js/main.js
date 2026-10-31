@@ -1,9 +1,9 @@
 (function () {
   // [почеток, крај, час, инструктор]
-  var MON_WED = [["8:00", "9:15", "Хата Винјаса, утринска група", "Маја"], ["18:00", "19:15", "Хата Винјаса јога", "Ангела"], ["19:30", "21:00", "Ајенгар јога, напредно ниво", "Симоне"]];
-  var TUE_THU = [["17:30", "19:00", "Аштанга Винјаса / работилници", "Марина"], ["19:15", "20:15", "Психосоматска пракса", "Марина"], ["20:30", "21:45", "Функционална пракса", "Михаела"]];
-  var FRI = [["8:00", "9:15", "Хата Винјаса, утринска група", "Маја"], ["19:30", "21:00", "Винјаса јога, напредно ниво", ""]];
-  var WEEKEND = [["8:00", "16:00", "Обука за јога учители (секој втор викенд)", ""]];
+  var MON_WED = [["8:00", "9:00", "Хата и Винјаса јога", "Маја"], ["18:00", "19:30", "Хата јога", "Симоне"], ["19:30", "21:00", "Хата јога, напредно ниво", "Симоне"]];
+  var TUE_THU = [["7:45", "8:45", "Хата јога", "Јасмина"], ["18:00", "19:30", "Аштанга Винјаса јога", "Марина"], ["19:45", "20:45", "Функционална јога", "Михаела"]];
+  var FRI = [["8:00", "9:00", "Хата и Винјаса јога", "Маја"], ["18:00", "19:30", "Хата јога", "Симоне"], ["19:30", "21:00", "Винјаса јога, напредно ниво", ""]];
+  var WEEKEND = [["8:00", "16:00", "Обука за јога учители, 200 часа", ""]];
   var days = [
     { name: "Недела", list: WEEKEND }, { name: "Понеделник", list: MON_WED }, { name: "Вторник", list: TUE_THU },
     { name: "Среда", list: MON_WED }, { name: "Четврток", list: TUE_THU }, { name: "Петок", list: FRI }, { name: "Сабота", list: WEEKEND }
@@ -59,17 +59,34 @@
 })();
 (function () {
   var btn = document.getElementById("menu-btn"), nav = document.getElementById("main-nav");
-  function setOpen(open) { nav.classList.toggle("open", open); btn.setAttribute("aria-expanded", open ? "true" : "false"); }
+  function setOpen(open) { nav.classList.toggle("open", open); btn.setAttribute("aria-expanded", open ? "true" : "false"); btn.setAttribute("aria-label", open ? "Затвори мени" : "Мени"); document.documentElement.classList.toggle("menu-open", open); }
+  window.addEventListener("resize", function () { if (window.innerWidth > 860) setOpen(false); });
   btn.addEventListener("click", function () { setOpen(!nav.classList.contains("open")); });
   nav.addEventListener("click", function (e) { if (e.target.closest("a")) setOpen(false); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") setOpen(false); });
+})();
+(function () {
+  // every phone link asks how to get in touch: call, WhatsApp or Viber
+  var sheet = document.getElementById("call-sheet");
+  if (!sheet || typeof sheet.showModal !== "function") return;
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest('a[href^="tel:"]');
+    if (!a || a.hasAttribute("data-direct")) return;
+    e.preventDefault();
+    sheet.showModal();
+    document.documentElement.classList.add("sheet-open");
+  });
+  sheet.addEventListener("close", function () { document.documentElement.classList.remove("sheet-open"); });
+  sheet.addEventListener("click", function (e) {
+    if (e.target === sheet || e.target.id === "call-close" || e.target.closest(".call-opt")) sheet.close();
+  });
 })();
 (function () {
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // entrances for content below the first screen
   if (!reduce && "IntersectionObserver" in window) {
-    var targets = document.querySelectorAll(".head, .about-text > p, .seal-row, .about-words, .practices > div, .stones, .facts > div, .ytt-text > *, .event, .contact > div, .frame, .pay-note");
+    var targets = document.querySelectorAll(".head, .about-text > p, .seal-row, .about-words, .practices > div, .stones, .facts > div, .ytt-text > *, .event, .contact > div, .frame, .pay-note, .founder figcaption, .extras");
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.remove("pre"); io.unobserve(e.target); } });
     }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
