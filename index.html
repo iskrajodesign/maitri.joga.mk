@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="mk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Maitri Yoga Скопје</title>
+<meta name="description" content="Maitri Yoga, центар за јога пракса и едукација на Варшавска 4 во Скопје. Хата Винјаса, Ајенгар, Аштанга, психосоматска пракса и обука за јога учители.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Golos+Text:wght@400;500;600&display=swap">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SportsActivityLocation",
+  "name": "Maitri Yoga",
+  "description": "Центар за јога пракса и едукација",
+  "telephone": "+38971233746",
+  "address": { "@type": "PostalAddress", "streetAddress": "Варшавска 4", "postalCode": "1000", "addressLocality": "Скопје", "addressCountry": "MK" },
+  "sameAs": ["https://www.instagram.com/maitri_yogaschool/", "https://www.youtube.com/@Marina-maitri"]
+}
+</script>
+<meta property="og:title" content="Maitri Yoga Скопје">
+<meta property="og:description" content="Центар за јога пракса и едукација. Варшавска 4, Скопје.">
+<meta property="og:image" content="assets/img/obuka.jpg">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header id="top">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <img src="assets/img/logo.png" alt="Maitri Yoga лого">
+      <span>MAITRI YOGA</span>
+    </a>
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Мени">
+      <span></span><span></span><span></span>
+    </button>
+    <nav aria-label="Главна навигација" id="main-nav">
+      <ul>
+        <li><a href="#za-nas">За нас</a></li>
+        <li><a href="#raspored">Распоред</a></li>
+        <li><a href="#praksi">Пракси</a></li>
+        <li><a href="#clenarina">Членарина</a></li>
+        <li><a href="#obuka">Обука за учители</a></li>
+        <li><a href="#kontakt">Контакт</a></li>
+      </ul>
+      <a class="nav-call" href="tel:+38971233746"><svg class="ico-phone" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 2.8c.5-.4 1.2-.3 1.6.2l2.2 2.9c.4.5.3 1.2-.1 1.6L9 8.8c.9 2.2 2.6 4.1 4.8 5.2l1.4-1.3c.4-.4 1.1-.4 1.6-.1l2.9 2.2c.5.4.6 1.1.2 1.6l-1.3 1.8c-.7.9-1.9 1.3-3 1-6.2-1.8-10.3-6-12-12.1-.3-1.1.1-2.3 1-3z"/></svg><span>071 233 746</span></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-text">
+        <span class="label">Центар за јога пракса и едукација</span>
+        <h1>Јога студио <em class="soft latin">Maitri</em> во Скопје</h1>
+        <p class="hero-lead">Хата Винјаса, Ајенгар, Аштанга и психосоматска пракса, секој работен ден наутро и навечер. Веќе 10 години обучуваме и јога учители.</p>
+        <div class="where">
+          <strong>Варшавска 4, Скопје</strong>
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=Maitri+Yoga+Varshavska+4+Skopje">Отвори на мапа</a>
+        </div>
+        <div class="actions">
+          <a class="btn btn-solid" href="tel:+38971233746">Закажи час: 071 233 746</a>
+          <a class="btn btn-line" href="#raspored">Распоред</a>
+        </div>
+      </div>
+      <div class="breath" aria-hidden="true">
+        <div class="ring r3"></div>
+        <div class="ring"></div>
+        <div class="ring r2"></div>
+        <div class="photo frame"><div class="blob"><img src="assets/img/hero.jpg" alt=""></div></div>
+        <div class="sun"></div>
+        <div class="breath-cue"><span>вдиши</span><span>издиши</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave" style="--from: var(--paper); --to: var(--plum-deep)"><svg viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0,64 C180,110 330,20 520,48 C700,74 820,118 1010,86 C1180,58 1300,10 1440,40 L1440,120 L0,120 Z"/></svg></div>
+  <section class="today" aria-labelledby="today-title">
+    <div class="wrap">
+      <div>
+        <div class="label" id="today-date">Денес</div>
+        <h2 id="today-title">Часови денес</h2>
+      </div>
+      <ol id="today-list"></ol>
+    </div>
+  </section>
+  <div class="wave" style="--from: var(--plum-deep); --to: var(--paper)"><svg viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C160,8 300,96 470,90 C660,84 760,20 960,30 C1140,40 1260,104 1440,78 L1440,120 L0,120 Z"/></svg></div>
+
+  <section class="sec" id="za-nas">
+    <div class="wrap about">
+      <div class="about-statement">
+        <span class="label">За нас</span>
+        <h2><em class="soft latin">Maitri</em> е љубов без приврзаност</h2>
+        <p class="about-words">Алтруизам, пријателство, љубов, добронамерност.</p>
+      </div>
+      <div class="about-text">
+        <p>Да негуваме добрина кон себе и кон сите живи суштества е една од главните цели на јога праксата, кога ја правиме со медитативен став и свесност.</p>
+        <p>Нашата санкалпа, намерата што нè води, е да создадеме заедница на луѓе што одат по духовниот пат на јогата, но и на сите што сакаат да се чувствуваат подобро во телото, умот и духот.</p>
+        <p>Покрај секојдневните часови, редовно организираме јога работилници, обука за јога учители и јога ретрити низ Европа.</p>
+        <div class="seal-row">
+          <svg class="seal" viewBox="0 0 120 120" aria-hidden="true">
+            <defs><path id="seal-ring" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
+            <circle cx="60" cy="60" r="58" class="seal-bg"/>
+            <g class="seal-spin"><text><textPath href="#seal-ring" textLength="284" lengthAdjust="spacing">REGISTERED YOGA SCHOOL · YOGA ALLIANCE · </textPath></text></g>
+            <text x="60" y="68" text-anchor="middle" class="seal-mid">RYS</text>
+          </svg>
+          <p><strong>Регистрирана јога школа (RYS)</strong> при Yoga Alliance. Нашата обука ги исполнува нивните меѓународни стандарди.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="wave" style="--from: var(--paper); --to: var(--blush)"><svg viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0,58 C210,100 400,24 620,46 C840,68 960,104 1160,80 C1290,64 1380,36 1440,44 L1440,120 L0,120 Z"/></svg></div>
+  <section class="sec s-blush" id="raspored">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">Сезона 2026/27</span>
+        <h2>Распоред на <em class="soft">часови</em></h2>
+        <p>Истиот распоред важи секоја недела. За место во група, јави се или пиши порака на <a href="https://www.instagram.com/maitri_yogaschool/">@maitri_yogaschool</a>.</p>
+      </div>
+      <div class="week-scroll"><div class="week" id="week"></div></div>
+    </div>
+  </section>
+  <div class="wave" style="--from: var(--blush); --to: var(--paper)"><svg viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0,90 C220,40 360,30 560,70 C760,110 900,60 1080,36 C1240,16 1350,60 1440,52 L1440,120 L0,120 Z"/></svg></div>
+
+  <section class="sec" id="praksi">
+    <div class="wrap practices-wrap">
+      <div>
+        <div class="head">
+          <span class="label">Што практикуваме</span>
+          <h2>Пракси и <em class="soft">инструктори</em></h2>
+        </div>
+        <dl class="practices">
+          <div><dt>Хата Винјаса</dt><dd>Со Маја и Ангела. Нежна пракса за поголема подвижност, помалку стрес и повеќе енергија. Добар почеток ако за прв пат доаѓаш.</dd></div>
+          <div><dt>Ајенгар јога</dt><dd>Со Симоне. Напредно ниво, прецизна работа со јажиња на ѕидот, појаси и блокчиња.</dd></div>
+          <div><dt>Аштанга Винјаса</dt><dd>Со Марина. Динамична пракса и јога работилници.</dd></div>
+          <div><dt>Психосоматска пракса</dt><dd>Со Марина. Ги поврзува јогата, соматската свесност и психолошкото истражување. Телото е извор на информации, а не нешто што треба да се поправи.</dd></div>
+          <div><dt>Функционална пракса</dt><dd>Со Михаела. Сила, подвижност и стабилност за секојдневното движење.</dd></div>
+          <div><dt>Винјаса, напредно ниво</dt><dd>Петок навечер, за вежбачи со искуство.</dd></div>
+        </dl>
+      </div>
+      <div class="duo">
+        <div class="frame a"><div class="blob"><img src="assets/img/jazhinja.jpg" alt="Вежбачи на јажињата на ѕидот во салата"></div></div>
+        <div class="frame b"><div class="blob b2"><img src="assets/img/voin.jpg" alt="Вежбачи во положба воин со раце нагоре"></div></div>
+      </div>
+    </div>
+  </section>
+  <div class="wave" style="--from: var(--paper); --to: var(--sage)"><svg viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0,70 C200,30 380,100 600,72 C800,46 900,14 1100,40 C1260,60 1340,96 1440,84 L1440,120 L0,120 Z"/></svg></div>
+
+  <section class="sec s-sage" id="clenarina">
+    <div class="wrap">
+      <div class="head">
+        <span class="label">Цени</span>
+        <h2>Месечна <em class="soft">членарина</em></h2>
+        <p>Избери колку пати неделно сакаш да вежбаш. Групата ја договараме заедно.</p>
+      </div>
+      <div class="stones">
+        <div class="stone"><span class="amount">1.300 <small>ден.</small></span><span class="per">1 час неделно</span></div>
+        <div class="stone"><span class="amount">2.600 <small>ден.</small></span><span class="per">2 часа неделно</span></div>
+        <div class="stone"><span class="amount">3.900 <small>ден.</small></span><span class="per">3 часа неделно</span></div>
+        <div class="stone"><span class="amount">5.000 <small>ден.</small></span><span class="per">секојдневна пракса</span></div>
+      </div>
+      <p class="pay-note">Плаќање на сметка: МАИТРИ ЈОГА Скопје, <span class="nowrap">270-0732205401-94</span>, Халкбанк АД Скопје.</p>
+    </div>
+  </section>
+  <div class="wave" style="--from: var(--sage); --to: var(--plum-deep)"><svg viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0,50 C240,96 420,10 640,34 C860,58 940,110 1160,92 C1300,80 1380,40 1440,30 L1440,120 L0,120 Z"/></svg></div>
+
+  <section class="sec s-plum" id="obuka">
+    <svg class="mandala" id="mandala" viewBox="-200 -200 400 400" aria-hidden="true"></svg>
+    <div class="wrap ytt">
+      <div class="ytt-text">
+        <span class="label">Обука за јога учители</span>
+        <h2>10 години. 10 генерации. <em class="soft">Една заедница.</em></h2>
+        <p class="ytt-big">200 часовна обука според стандардите на Yoga Alliance, во регистрирана јога школа (RYS).</p>
+        <dl class="facts">
+          <div><dt>Почеток</dt><dd>24 октомври 2026</dd></div>
+          <div><dt>Кога</dt><dd>Секој втор викенд, 08:00 до 16:00</dd></div>
+          <div><dt>Инвестиција</dt><dd>1.200 €, можно на рати</dd></div>
+          <div><dt>Сертификат</dt><dd>Регистрација како RYT-200</dd></div>
+        </dl>
+        <p>Биомеханика на телото преку повеќе од 70 асани, како безбедно и јасно да се води час, јога филозофија и древните текстови, пранајама и медитација. Не мора да сакаш да станеш учител. Доволно е да имаш посветена пракса и желба да ја разбереш јогата подлабоко.</p>
+        <a class="btn" href="tel:+38971233746">Прашај за обуката: 071 233 746</a>
+      </div>
+      <div class="frame"><div class="blob b2"><img src="assets/img/obuka.jpg" alt="Учесници во обуката за јога учители во салата на Maitri"></div></div>
+    </div>
+  </section>
+  <div class="wave" style="--from: var(--plum-deep); --to: var(--paper)"><svg viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0,30 C200,80 360,110 560,84 C760,58 860,20 1060,44 C1240,66 1340,100 1440,90 L1440,120 L0,120 Z"/></svg></div>
+
+  <section class="sec" id="kontakt">
+    <div class="wrap event-contact">
+      <article class="event" id="nastan">
+        <span class="label">Работилница овој викенд</span>
+        <h3>Интегративни констелации</h3>
+        <p class="dates">31 октомври и 1 ноември 2026</p>
+        <p>Дводневна искуствена работилница за подобро разбирање на себе.</p>
+      </article>
+      <div>
+        <div class="head">
+          <span class="label">Контакт</span>
+          <h2>Дојди на <em class="soft">час</em></h2>
+        </div>
+        <div class="contact">
+          <div><span class="label">Адреса</span><span class="value">Варшавска 4, 1000 Скопје</span><a href="https://www.google.com/maps/search/?api=1&amp;query=Maitri+Yoga+Varshavska+4+Skopje">Отвори на Google Мапи</a></div>
+          <div><span class="label">Телефон</span><span class="value">071 233 746</span><span>Јави се или прати порака</span></div>
+          <div><span class="label">Следи нè</span><span class="value">@maitri_yogaschool</span><span><a href="https://www.instagram.com/maitri_yogaschool/">Instagram</a> · <a href="https://www.facebook.com/share/1HKpBtwFXV/">Facebook</a> · <a href="https://www.youtube.com/@Marina-maitri/videos">YouTube</a></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="wave" style="--from: var(--paper); --to: var(--sand)"><svg viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0,80 C260,40 420,96 660,70 C880,46 1000,20 1200,46 C1320,62 1390,80 1440,72 L1440,120 L0,120 Z"/></svg></div>
+</main>
+
+<footer class="s-sand">
+  <div class="wrap">
+    <span>Maitri Yoga, Варшавска 4, Скопје</span>
+    <span>Центар за јога пракса и едукација</span>
+  </div>
+</footer>
+
+<div class="cursor-lotus" id="cursor-lotus" aria-hidden="true"><svg viewBox="14 14 44 44"><path d="M36 20c6 8 6 18 0 26c-6-8-6-18 0-26z"/><path d="M36 46c-2-9-9-15-17-15c2 9 8 15 17 15z"/><path d="M36 46c2-9 9-15 17-15c-2 9-8 15-17 15z"/></svg></div>
+<div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
