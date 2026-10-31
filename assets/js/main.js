@@ -176,3 +176,22 @@
     if (i > 0 && t.length - i < 10 && prevWord.length + t.length - i < 18) last.nodeValue = t.slice(0, i) + "\u00A0" + t.slice(i + 1);
   });
 })();
+
+(function () {
+  // GitHub Pages lets phones keep the page for up to 10 minutes, and phones keep open tabs.
+  // Ask the server for the current page; if it points to a newer main.js, reload once.
+  var me = document.currentScript && document.currentScript.src;
+  var mine = me && me.split("?v=")[1];
+  if (!mine || !window.fetch) return;
+  function check() {
+    fetch(location.pathname + "?fresh=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.ok ? r.text() : ""; }).then(function (html) {
+      var m = html.match(/main\.js\?v=([a-f0-9]+)/);
+      if (!m || m[1] === mine) return;
+      try { if (sessionStorage.getItem("maitri-reloaded") === m[1]) return; sessionStorage.setItem("maitri-reloaded", m[1]); } catch (e) {}
+      location.reload();
+    }).catch(function () {});
+  }
+  check();
+  window.addEventListener("pageshow", function (e) { if (e.persisted) check(); });
+  document.addEventListener("visibilitychange", function () { if (document.visibilityState === "visible") check(); });
+})();
