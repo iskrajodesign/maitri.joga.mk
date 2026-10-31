@@ -59,7 +59,7 @@
 })();
 (function () {
   var btn = document.getElementById("menu-btn"), nav = document.getElementById("main-nav");
-  function setOpen(open) { nav.classList.toggle("open", open); btn.setAttribute("aria-expanded", open ? "true" : "false"); btn.setAttribute("aria-label", open ? "Затвори мени" : "Мени"); document.documentElement.classList.toggle("menu-open", open); }
+  function setOpen(open) { nav.classList.toggle("open", open); btn.setAttribute("aria-expanded", open ? "true" : "false"); btn.setAttribute("aria-label", open ? "Затворете го менито" : "Мени"); document.documentElement.classList.toggle("menu-open", open); }
   window.addEventListener("resize", function () { if (window.innerWidth > 860) setOpen(false); });
   btn.addEventListener("click", function () { setOpen(!nav.classList.contains("open")); });
   nav.addEventListener("click", function (e) {
