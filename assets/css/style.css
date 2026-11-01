@@ -587,3 +587,14 @@ html.sheet-open .cursor-dot, html.sheet-open .cursor-lotus { opacity: 0 !importa
 .chip .who { grid-column: 2; color: var(--muted); font-size: 0.88rem; }
 .k-ob .who { color: var(--cream-on-plum); }
 @media (max-width: 860px) { .chip .who { grid-column: 2; font-size: 0.9rem; } .chip.range .who { grid-column: 1; } }
+
+/* touch targets: at least 44x44 on phones */
+@media (max-width: 860px), (pointer: coarse) {
+  .menu-btn { width: 48px; height: 44px; }
+  .brand { min-height: 44px; }
+  .stab { min-width: 44px; min-height: 44px; }
+  .social a { width: 48px; height: 48px; }
+  main p a, .contact a:not(.tel-value), .nav-foot a, footer a, .where a, .info a { display: inline-flex; align-items: center; min-height: 44px; }
+  main p a { display: inline; padding-block: 12px; }
+  .contact .tel-value { min-height: 44px; display: flex; align-items: center; }
+}
