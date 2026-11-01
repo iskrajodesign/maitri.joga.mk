@@ -1,44 +1,49 @@
 (function () {
-  // [почеток, крај, час, инструктор]
-  var MON_WED = [["8:00", "9:00", "Хата и Винјаса јога", "Маја"], ["18:00", "19:30", "Хата јога", "Симоне"], ["19:30", "21:00", "Хата јога, напредно ниво", "Симоне"]];
-  var TUE_THU = [["7:45", "8:45", "Хата јога", "Јасмина"], ["18:00", "19:30", "Аштанга Винјаса јога", "Марина"], ["19:45", "20:45", "Функционална јога", "Михаела"]];
-  var FRI = [["8:00", "9:00", "Хата и Винјаса јога", "Маја"], ["18:00", "19:30", "Хата јога", "Симоне"], ["19:30", "21:00", "Винјаса јога, напредно ниво", ""]];
-  var WEEKEND = [["8:00", "16:00", "Обука за јога учители, 200 часа", ""]];
-  var days = [
-    { name: "Недела", list: WEEKEND }, { name: "Понеделник", list: MON_WED }, { name: "Вторник", list: TUE_THU },
-    { name: "Среда", list: MON_WED }, { name: "Четврток", list: TUE_THU }, { name: "Петок", list: FRI }, { name: "Сабота", list: WEEKEND }
-  ];
-  var months = ["јануари", "февруари", "март", "април", "мај", "јуни", "јули", "август", "септември", "октомври", "ноември", "декември"];
-  var now = new Date(), today = now.getDay(), minutesNow = now.getHours() * 60 + now.getMinutes();
+  var K = {
+    hv: ["Хата Винјаса јога", "k-hv"], aj: ["Ајенгар јога", "k-aj"], as: ["Аштанга Винјаса работилници", "k-as"],
+    fn: ["Функционална пракса", "k-fn"], vn: ["Винјаса пракса, напредно ниво", "k-vn"],
+    ob: ["Обука за јога учители", "k-ob"], jr: ["Јога работилници", "k-jr"], jf: ["Јогиска филозофија", "k-jf"]
+  };
+  // [почеток, крај (ако е објавен), вид на час]
+  var MON_WED = [["8:00", "", "hv"], ["18:00", "", "hv"], ["19:30", "", "aj"]];
+  var TUE_THU = [["18:30", "", "as"], ["20:15", "", "fn"]];
+  var FRI = [["8:00", "", "hv"], ["19:30", "", "vn"]];
+  var WEEKEND = [["8:00", "16:00", "ob"], ["8:00", "12:00", "jr"], ["13:00", "16:00", "jf"]];
+  var ROWS = [["Понеделник", MON_WED], ["Вторник", TUE_THU], ["Среда", MON_WED], ["Четврток", TUE_THU], ["Петок", FRI], ["Сабота и недела", WEEKEND]];
+  var TABS = [["Пон", 0], ["Вто", 1], ["Сре", 2], ["Чет", 3], ["Пет", 4], ["Саб", 5], ["Нед", 5]];
+  var now = new Date(), dow = now.getDay(), minutesNow = now.getHours() * 60 + now.getMinutes();
+  var todayRow = (dow === 0 || dow === 6) ? 5 : dow - 1;
+  var todayTab = dow === 0 ? 6 : dow === 6 ? 5 : dow - 1;
   function toMinutes(t) { var p = t.split(":"); return +p[0] * 60 + +p[1]; }
   function esc(s) { return s.replace(/[&<>]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]; }); }
-  function who(c) { return c[3] ? "со " + c[3] : ""; }
 
-  document.getElementById("today-date").textContent = days[today].name + ", " + now.getDate() + " " + months[now.getMonth()];
-  var nextShown = false;
-  document.getElementById("today-list").innerHTML = days[today].list.map(function (c) {
-    var past = toMinutes(c[1]) <= minutesNow, tag = "";
-    if (!past && !nextShown) { tag = '<span class="next-tag">' + (toMinutes(c[0]) <= minutesNow ? "во тек" : "следен") + "</span>"; nextShown = true; }
-    return '<li class="' + (past ? "past" : "") + '"><time>' + esc(c[0]) + "</time><span>" + esc(c[2]) + tag + "</span>" +
-      (who(c) ? '<span class="who">' + esc(who(c)) + "</span>" : "") + "</li>";
+  var rowsEl = document.getElementById("sched-rows"), tabsEl = document.getElementById("sched-tabs");
+  var nextDone = false;
+  rowsEl.innerHTML = ROWS.map(function (r, i) {
+    var isToday = i === todayRow;
+    var chips = r[1].map(function (c) {
+      var tag = "", past = false;
+      if (isToday) {
+        // evening start times are published without an end; assume about 75 minutes just to know when a class is over
+        var end = c[1] ? toMinutes(c[1]) : toMinutes(c[0]) + 75;
+        past = end <= minutesNow;
+        if (!past && !nextDone) { tag = '<span class="next-tag">' + (toMinutes(c[0]) <= minutesNow ? "во тек" : "следен") + "</span>"; nextDone = true; }
+      }
+      return '<li class="chip ' + K[c[2]][1] + (c[1] ? " range" : "") + (past ? " past" : "") + '"><time>' + esc(c[0]) + (c[1] ? " до " + esc(c[1]) : "") + "</time><span>" + esc(K[c[2]][0]) + tag + "</span></li>";
+    }).join("");
+    return '<section class="srow' + (isToday ? " is-today" : "") + '" data-row="' + i + '"><h3>' + r[0] + "</h3><ul>" + chips + "</ul>" +
+      (i === 5 ? '<p class="srow-note">Обуката се одржува секој втор викенд.</p>' : "") + "</section>";
   }).join("");
-  if (!nextShown) {
-    document.getElementById("today-title").textContent = "Денешните часови завршија";
-    var t = days[(today + 1) % 7];
-    document.getElementById("today-list").insertAdjacentHTML("afterend",
-      "<p>Утре прв час е во " + esc(t.list[0][0]) + ": " + esc(t.list[0][2]) + ".</p>");
+  tabsEl.innerHTML = TABS.map(function (t, i) {
+    return '<button type="button" role="tab" class="stab' + (i === todayTab ? " is-today" : "") + '" data-tab="' + i + '" data-row="' + t[1] + '">' + t[0] + "</button>";
+  }).join("");
+  function showTab(i) {
+    var tabs = tabsEl.children, rows = rowsEl.children, row = TABS[i][1];
+    for (var k = 0; k < tabs.length; k++) { var on = k === i; tabs[k].classList.toggle("on", on); tabs[k].setAttribute("aria-selected", on ? "true" : "false"); }
+    for (var q = 0; q < rows.length; q++) rows[q].classList.toggle("is-active", q === row);
   }
-
-  function dayCol(title, list, isToday) {
-    return '<div class="day' + (isToday ? " is-today" : "") + '"><h3>' + title + "</h3><ul>" +
-      list.map(function (c) {
-        return "<li><time>" + esc(c[0]) + " до " + esc(c[1]) + "</time><span>" + esc(c[2]) + "</span>" +
-          (who(c) ? '<span class="who">' + esc(who(c)) + "</span>" : "") + "</li>";
-      }).join("") + "</ul></div>";
-  }
-  var cols = [1, 2, 3, 4, 5].map(function (i) { return dayCol(days[i].name, days[i].list, i === today); });
-  cols.push(dayCol("Сабота и недела", WEEKEND, today === 0 || today === 6));
-  document.getElementById("week").innerHTML = cols.join("");
+  tabsEl.addEventListener("click", function (e) { var b = e.target.closest(".stab"); if (b) showTab(+b.getAttribute("data-tab")); });
+  showTab(todayTab);
 
   // lotus mandala: three rings of petals
   var m = document.getElementById("mandala"), out = "";
@@ -107,7 +112,7 @@
 
   // entrances for content below the first screen
   if (!reduce && "IntersectionObserver" in window) {
-    var targets = document.querySelectorAll(".head, .about-text > p, .seal-row, .about-words, .practices > div, .stones, .facts > div, .ytt-text > *, .event, .contact > div, .frame, .pay-note, .founder figcaption, .extras");
+    var targets = document.querySelectorAll(".head, .about-text > p, .seal-row, .about-words, .practices > div, .plans, .plans-cta, .facts > div, .ytt-text > *, .event, .contact > div, .frame, .pay-note, .founder figcaption, .extras");
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.remove("pre"); io.unobserve(e.target); } });
     }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
@@ -129,7 +134,7 @@
     if (!started) { started = true; lx = mx; ly = my; document.documentElement.classList.add("has-cursor"); requestAnimationFrame(loop); }
     var t = e.target;
     lotus.classList.toggle("is-link", !!(t.closest && t.closest("a, button")));
-    var dark = !!(t.closest && t.closest(".s-plum, .today, .btn-solid, .stone:nth-child(4)"));
+    var dark = !!(t.closest && t.closest(".s-plum, .btn-solid, .k-ob"));
     lotus.classList.toggle("on-dark", dark); dot.classList.toggle("on-dark", dark);
   });
   document.addEventListener("mouseleave", function () { document.documentElement.classList.remove("has-cursor"); started = false; });
