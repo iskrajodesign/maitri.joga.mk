@@ -5,9 +5,9 @@
     ob: ["Обука за јога учители", "k-ob"], jr: ["Јога работилници", "k-jr"], jf: ["Јогиска филозофија", "k-jf"]
   };
   // [почеток, крај (ако е објавен), вид на час]
-  var MON_WED = [["8:00", "", "hv"], ["18:00", "", "hv"], ["19:30", "", "aj"]];
-  var TUE_THU = [["18:30", "", "as"], ["20:15", "", "fn"]];
-  var FRI = [["8:00", "", "hv"], ["19:30", "", "vn"]];
+  var MON_WED = [["8:00", "", "hv", "Маја"], ["18:00", "", "hv", "Симоне"], ["19:30", "", "aj", "Симоне"]];
+  var TUE_THU = [["18:30", "", "as", "Марина"], ["20:15", "", "fn", "Михаела"]];
+  var FRI = [["8:00", "", "hv", "Маја"], ["19:30", "", "vn", ""]];
   var WEEKEND = [["8:00", "16:00", "ob"], ["8:00", "12:00", "jr"], ["13:00", "16:00", "jf"]];
   var ROWS = [["Понеделник", MON_WED], ["Вторник", TUE_THU], ["Среда", MON_WED], ["Четврток", TUE_THU], ["Петок", FRI], ["Сабота и недела", WEEKEND]];
   var TABS = [["Пон", 0], ["Вто", 1], ["Сре", 2], ["Чет", 3], ["Пет", 4], ["Саб", 5], ["Нед", 5]];
@@ -29,7 +29,7 @@
         past = end <= minutesNow;
         if (!past && !nextDone) { tag = '<span class="next-tag">' + (toMinutes(c[0]) <= minutesNow ? "во тек" : "следен") + "</span>"; nextDone = true; }
       }
-      return '<li class="chip ' + K[c[2]][1] + (c[1] ? " range" : "") + (past ? " past" : "") + '"><time>' + esc(c[0]) + (c[1] ? " до " + esc(c[1]) : "") + "</time><span>" + esc(K[c[2]][0]) + tag + "</span></li>";
+      return '<li class="chip ' + K[c[2]][1] + (c[1] ? " range" : "") + (past ? " past" : "") + '"><time>' + esc(c[0]) + (c[1] ? " до " + esc(c[1]) : "") + "</time><span>" + esc(K[c[2]][0]) + tag + "</span>" + (c[3] ? '<span class="who">со ' + esc(c[3]) + "</span>" : "") + "</li>";
     }).join("");
     return '<section class="srow' + (isToday ? " is-today" : "") + '" data-row="' + i + '"><h3>' + r[0] + "</h3><ul>" + chips + "</ul>" +
       (i === 5 ? '<p class="srow-note">Обуката се одржува секој втор викенд.</p>' : "") + "</section>";

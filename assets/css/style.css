@@ -232,7 +232,8 @@ h1, h2, h3, dt, .ytt-big, .about-words, .dates { text-wrap: balance; }
 
 /* the wave strip is painted half in the colour above and half in the colour below (a hard split, not a fade),
    so the anti-aliased edge row at either end always lands on a matching colour and no hairline appears */
-.wave { background: linear-gradient(to bottom, var(--from) 50%, var(--to) 50%); position: relative; z-index: 1; margin-block: -1px; padding-block: 1px; }
+/* the whole wave keeps its curve; only the last pixel row is painted in the next colour so there is never a hairline under it */
+.wave { background: linear-gradient(to bottom, var(--from) calc(100% - 2px), var(--to) calc(100% - 2px)); position: relative; z-index: 1; margin-block: -1px; padding-block: 1px; }
 
 .ico-phone { width: 16px; height: 16px; flex: none; fill: currentColor; }
 .brand { cursor: pointer; }
@@ -505,7 +506,7 @@ html.sheet-open .cursor-dot, html.sheet-open .cursor-lotus { opacity: 0 !importa
 .srow.is-today h3::after { content: "денес"; margin-left: 10px; font-family: var(--body); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--plum); vertical-align: middle; }
 .srow ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; min-width: 0; }
 .srow-note { grid-column: 2; margin: 0; font-size: 0.9rem; color: var(--muted); }
-.chip { display: inline-flex; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; padding: 10px 20px; border-radius: 999px; font-size: 0.97rem; line-height: 1.3; background: #E9C6D5; color: var(--ink); }
+.chip { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: baseline; gap: 0 14px; padding: 10px 22px; border-radius: 28px; font-size: 0.97rem; line-height: 1.3; background: #E9C6D5; color: var(--ink); }
 .chip time { font-weight: 700; color: var(--plum-deep); font-variant-numeric: lining-nums tabular-nums; white-space: nowrap; }
 .chip.past { opacity: 0.5; }
 .chip .next-tag { margin-left: 8px; }
@@ -576,3 +577,7 @@ html.sheet-open .cursor-dot, html.sheet-open .cursor-lotus { opacity: 0 !importa
 .hero { overflow-x: clip; }
 .seal-lotus path { fill: none; stroke: var(--plum-deep); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .seal text { font-size: 8.4px; letter-spacing: 0.6px; }
+
+.chip .who { grid-column: 2; color: var(--muted); font-size: 0.88rem; }
+.k-ob .who { color: var(--cream-on-plum); }
+@media (max-width: 860px) { .chip .who { grid-column: 2; font-size: 0.9rem; } .chip.range .who { grid-column: 1; } }
